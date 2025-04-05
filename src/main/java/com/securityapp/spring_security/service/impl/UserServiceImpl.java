@@ -57,12 +57,12 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UserDTO update(String username, UserDTO newUser) {
-        if (userRepository.existsByEmail(newUser.getEmail())) {
-            throw new IllegalArgumentException("that email is in use");
-        }
         Optional<UserEntity> optional = userRepository.findUserEntityByUsername(username);
         if (optional.isPresent()){
             UserEntity user = optional.get();
+            if (!user.getEmail().equals(newUser.getEmail()) && userRepository.existsByEmail(newUser.getEmail())) {
+                throw new IllegalArgumentException("that email is in use");
+            }
             user.setUsername(newUser.getUsername());
             user.setEmail(newUser.getEmail());
             user.setPassword(passwordEncoder.encode(newUser.getPassword()));

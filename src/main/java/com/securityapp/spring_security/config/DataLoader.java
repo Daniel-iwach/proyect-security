@@ -42,14 +42,14 @@ public class DataLoader implements CommandLineRunner {
         UserDTO admin = new UserDTO(
                 null,
                 "Admin",
-                passwordEncoder.encode("admin123"),
+                "admin123",
                 "admin@email.com",
                 Set.of("ADMIN")
         );
         UserDTO user = new UserDTO(
                 null,
-                "Usuario",
-                passwordEncoder.encode("user123"),
+                "User",
+                "user123",
                 "user@email.com",
                 Set.of("USER")
         );
